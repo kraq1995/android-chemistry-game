@@ -29,6 +29,7 @@ public class Circle extends View {
     public double getRadius(){
         return Radius;
     }
+    public void setRadius(double value){this.Radius = value;}
     public void setX(double value){
         this.X = value;
     }
