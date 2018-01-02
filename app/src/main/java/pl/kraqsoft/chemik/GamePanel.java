@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,16 +16,17 @@ import android.view.View;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-
-    private circlePlayer player;
+    private RectPlayer player;
+    //private circlePlayer player;
     private Point playerPoint;
 
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
-        player = new circlePlayer(new Circle(50,50,4, context), Color.rgb(255,0,0));
-        playerPoint = new Point(25,25);
+        player = new RectPlayer(new Rect(100,100,150,150), Color.rgb(255,0,0));
+        //player = new circlePlayer(new Circle(50,50,4, context), Color.rgb(255,0,0));
+        playerPoint = new Point(100,100);
         setFocusable(true);
 
     }
@@ -65,12 +67,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update(){
-        player.update(playerPoint, 55);
+        player.Update(playerPoint);
     }
     @Override
+    //BACKGROUND
     public void draw(Canvas canvas){
         super.draw(canvas);
-        canvas.drawColor(Color.rgb(255,0,0));
+        canvas.drawColor(Color.WHITE);
         player.draw(canvas);
     }
 }

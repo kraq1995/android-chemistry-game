@@ -28,7 +28,7 @@ public class MainThread extends Thread {
     @Override
     public void run(){
         long startTime;
-        long timeMillis = 100/MAX_FPS;
+        long timeMillis = 1000/MAX_FPS;
         long waitTime;
         int frameCount = 0;
         long totalTime = 0;
@@ -46,7 +46,7 @@ public class MainThread extends Thread {
                 }
             }catch(Exception e){e.printStackTrace();}
             finally {
-                if(canvas!= null){
+                if(canvas != null){
                     try{
                         surfaceHolder.unlockCanvasAndPost(canvas);
                     }catch (Exception e){e.printStackTrace();}

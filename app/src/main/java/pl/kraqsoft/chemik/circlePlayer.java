@@ -9,6 +9,7 @@ import android.graphics.Point;
  */
 
 public class circlePlayer implements IGameObject {
+
     private Circle circle;
     private int color;
     private int x,y,radius;
