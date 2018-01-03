@@ -7,9 +7,11 @@ import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 import pl.kraqsoft.chemik.Vievs.HighScore;
+import pl.kraqsoft.chemik.Vievs.MainMenu;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     int score = 1337;
     @Override
@@ -17,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setConstants();
+        SetConstants();
+        ShowMenu();
         setContentView(new GamePanel(this));
-        showResult();
+       // showResult();
     }
 
-    protected void setConstants(){
+    protected void SetConstants(){
         DisplayMetrics ds = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(ds);
         Constants.SCREEN_WIDTH = ds.widthPixels;
@@ -36,6 +39,23 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("SCORE", score);
         startActivity(intent);
     }
+
+    protected void ShowMenu(){
+        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(intent);
+    }
+
+    protected void GameLogic(){
+
+    }
+
+    public enum GameState{
+        GAME_ON_MAIN_MENU,
+        GAME_RUNNING,
+
+    }
+
+
 
 }
 

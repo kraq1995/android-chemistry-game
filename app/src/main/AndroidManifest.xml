@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vievs.HighScore"></activity>
+        <activity android:name=".Vievs.HighScore" />
+        <activity android:name=".Vievs.MainMenu"></activity>
     </application>
 
 </manifest>
