@@ -7,5 +7,7 @@ package pl.kraqsoft.chemik;
 public class Constants {
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
+    public static final int ATOM_RADIUS = 70;
+    public static final int ATOM_HITBOX = 100;
 
 }

@@ -8,18 +8,18 @@ import android.graphics.Point;
  * Created by krakus on 12/27/2017.
  */
 
-public class circlePlayer implements IGameObject {
+public class CirclePlayer implements IGameObject {
 
-    private Circle circle;
+    private Atom atom;
     private int color;
     private int x,y,radius;
 
-    public circlePlayer(Circle circle, int color){
-        this.circle =  circle;
+    public CirclePlayer(Atom atom, int color){
+        this.atom = atom;
         this.color = color;
-        this.x = ((int) circle.getMiddleX());
-        this.y = ((int) circle.getMiddleY());
-        this.radius = ((int) circle.getRadius());
+        this.x = ((int) atom.getX());
+        this.y = ((int) atom.getY());
+        this.radius = ((int) atom.getRadius());
     }
 
     @Override
@@ -35,9 +35,9 @@ public class circlePlayer implements IGameObject {
     }
 
     public void update(Point point, int Radius){
-        circle.setX(point.x);
-        circle.setY(point.y);
-        circle.setRadius(Radius);
+        atom.setX(point.x);
+        atom.setY(point.y);
+        atom.setRadius(Radius);
     }
 
 }

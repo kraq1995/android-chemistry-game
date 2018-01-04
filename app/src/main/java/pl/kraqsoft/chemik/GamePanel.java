@@ -10,27 +10,37 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Created by krakus on 11/5/2017.
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-    private RectPlayer player;
-    //private circlePlayer player;
-    private Point playerPoint;
+    private ArrayList<Atom> atomArrayList = new ArrayList<>();
 
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
+        populateAtomArrayList();
         thread = new MainThread(getHolder(), this);
-        player = new RectPlayer(new Rect(100,100,150,150), Color.rgb(255,0,0));
-        //player = new circlePlayer(new Circle(50,50,4, context), Color.rgb(255,0,0));
-        playerPoint = new Point(100,100);
         setFocusable(true);
-
     }
 
+    private void populateAtomArrayList(){
+        Random rand = new Random();
+
+        for(int i = 0; i<5; i++){
+            atomArrayList.add(new Atom(getContext(),
+                    rand.nextInt(Constants.SCREEN_WIDTH - 2*Constants.ATOM_RADIUS) + Constants.ATOM_RADIUS,
+                    rand.nextInt(Constants.SCREEN_HEIGHT - 2*Constants.ATOM_RADIUS - 100) + 100,
+                    Constants.ATOM_RADIUS,
+                    Color.RED,
+                    "H"));
+        }
+    }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){
 
@@ -46,35 +56,60 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder){
         boolean retry = true;
-        while(true){
+        while(retry){
             try{
                 thread.setRunning(false);
                 thread.join();
-            }catch (Exception e){e.printStackTrace();}
-            retry = false;
+                retry = false;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
+    private Atom draggingAtom;
     @Override
     public boolean onTouchEvent(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                for(Atom atom: atomArrayList){
+                    if(atom.isTouched((int)event.getX(), (int)event.getY())) {
+                        draggingAtom = atom;
+                        break;
+                    }
+                }
+                break;
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX(), (int)event.getY());
+                if(draggingAtom != null) {
+                    draggingAtom.updatePositon((int) event.getX(), (int) event.getY());
+                    draggingAtom.setColliding(false);
+                    for (Atom atom : atomArrayList) {
+                        if(atom == draggingAtom)
+                            continue;
+                        atom.setColliding(false);
+                        if (atom.getHitbox().intersect(draggingAtom.getHitbox())) {
+                            atom.setColliding(true);
+                            draggingAtom.setColliding(true);
+                        }
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                draggingAtom = null;
+                break;
         }
+
         return true;
-        //return super.onTouchEvent(event);
     }
 
-    public void update(){
-        player.Update(playerPoint);
-    }
     @Override
-    //BACKGROUND
     public void draw(Canvas canvas){
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
-        player.draw(canvas);
+        for(Atom atom : atomArrayList){
+            atom.draw(canvas);
+        }
     }
+
 }
 

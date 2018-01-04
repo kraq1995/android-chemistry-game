@@ -1,16 +1,14 @@
-package pl.kraqsoft.chemik.Vievs;
+package pl.kraqsoft.chemik.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.content.SharedPreferencesCompat;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import pl.kraqsoft.chemik.R;
 
-public class HighScore extends AppCompatActivity {
+public class HighScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

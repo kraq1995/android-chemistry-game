@@ -1,6 +1,5 @@
-package pl.kraqsoft.chemik.Vievs;
+package pl.kraqsoft.chemik.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.widget.Button;
 import pl.kraqsoft.chemik.GamePanel;
 import pl.kraqsoft.chemik.R;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
         public Button btn1;
         public Button btn2;
@@ -24,7 +23,7 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GamePanel.class);
+                Intent intent = new Intent(MainMenuActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });
@@ -33,7 +32,7 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        init();
     }
-
 
 }
