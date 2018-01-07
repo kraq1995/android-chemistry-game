@@ -27,6 +27,14 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenuActivity.this, HighScoreActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

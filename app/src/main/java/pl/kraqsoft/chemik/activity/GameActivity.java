@@ -24,9 +24,7 @@ public class GameActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         SetConstants();
-        //ShowMenu();
         setContentView(new GamePanel(this));
-        // showResult();
     }
 
     protected void SetConstants() {
@@ -49,9 +47,6 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void GameLogic() {
-
-    }
 
 }
 
